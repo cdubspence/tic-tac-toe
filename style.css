@@ -1,0 +1,42 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh;
+    text-align: center;
+    color: #2e186b;
+    text-shadow: 2px 3px #64f000;
+    font-family: 'Anton', sans-serif;
+}
+.scoreBoard {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 38px;
+}
+
+.player1 {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.player2 {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.gameBoard {
+    grid-column: 2;
+    margin: auto;
+    height: 450px;
+    width: 450px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.cell {
+    border: 1px solid greenyellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
