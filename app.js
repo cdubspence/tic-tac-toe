@@ -1,5 +1,7 @@
+
 const gameBoard = (() => {
-    const cell = document.querySelectorAll('.cell');
+    const cells = document.querySelectorAll('.cell');
+    const overlay = document.querySelector('.overlay');
     let marker = 'X';
     let playerXmoves = [];
     let playerOmoves = [];
@@ -14,58 +16,108 @@ const gameBoard = (() => {
         [2,4,6]
     ]
 
-    // cell.forEach(cell => {
-    //     cell.addEventListener('click', event => {
-    //         cell.innerHTML = `<h1>${marker}</h1>`;
-    //     if (marker == 'X') {
-    //         marker = 'O';
-    //     } else {
-    //         marker = 'X'
-    //     }
-    //     })
-    // })
+    function setup() {
+        cells.forEach(cell => {
+            cell.addEventListener('click', function() {
+                cell.style.backgroundColor = 'white';
+                cell.style.border = '2px solid #64f000'
+                playerMove(cell)
+            })
+        })
+        document.querySelectorAll('#resetBtn').forEach(button => {
+            button.addEventListener('click', function() {
+                reset();
+            })
+        })
+    }
 
-    cell.forEach(cell => {
-        cell.addEventListener('click', playerMove)
-    })
-
-    function playerMove() {
-        cell.innerHTML = `<h1>${marker}</h1>`;
-        if (marker == 'X') {
-           playerXmoves.push(cell.id)
-            marker = 'O';
-            checkBoard()
-        } else {
-            playerOmoves.push(cell.id)
-            marker = 'X'
-            checkBoard()
+    function playerMove(cell) {
+        if(cell.innerHTML != '') {return}
+        else {
+            cell.innerHTML = `<h1>${marker}</h1>`;
+            if (marker == 'X') {
+                playerXmoves.push(cell.id)
+                marker = 'O';
+                checkBoard()
+            } else {
+                playerOmoves.push(cell.id)
+                marker = 'X'
+                checkBoard()
+            }
         }
+        
     }
 
     function checkBoard() {
+        let winner = '';
         for(i = 0; i < winningCombos.length; i++) {
-            if(playerXmoves.sort().join(',') === winningCombos.sort().join(',')) {
-                console.log('X WINS');
-            } else if (playerOmoves.sort().join(',') === winningCombos.sort().join(',')) {
-                console.log('O WINS');
-            } else return
+            if(winningCombos[i].sort().join(',') === playerXmoves.sort().join(',')) {
+                winner = 'X Wins!'
+                displayResults(winner)
+            } else if (winningCombos[i].sort().join(',') === playerOmoves.sort().join(',')) {
+                winner = 'O Wins!'
+                console.log(winner)
+                displayResults(winner)
+            } else if (playerOmoves.length+playerXmoves.length == 9){
+                winner = 'Tie!'
+                displayResults(winner)
+            } 
         }
     }
 
+    function displayResults(winner) {
+        overlay.innerHTML += `<h1>${winner}</h1>`;
+        overlay.style.width = '100%';
+
+    }
+
     function reset() {
+        overlay.style.width = '0';
+        overlay.innerHTML = ''
         marker = 'X'
-        return cell.forEach(cell => {
+        playerOmoves = [];
+        playerXmoves = [];
+        cells.forEach(cell => {
             cell.innerHTML = ''
+            cell.style.border = 'none';
+            cell.style.backgroundColor = '#64f000'
         })
     }
     return {
+        setup,
         playerMove,
         checkBoard,
         reset
     }
 })();
 
-const updateDOM = (() => {
-    const resetBtn = document.getElementById('resetBtn');
-    resetBtn.addEventListener('click', gameBoard.reset())
-})();
+gameBoard.setup();
+
+
+
+
+
+//maybe check wins?
+// xwins = winningCombos[i].every(el => {
+//     return playerXmoves.includes(el);    
+// })
+// owins = winningCombos[i].every(el => {
+//     return playerOmoves.includes(el);
+// })
+
+
+// const game = (() => {
+
+//     (function setup() {
+//         gameBoard.cell.forEach(cell => {
+//             cell.addEventListener('click', gameBoard.playerMove)
+//         });
+//         document.getElementById('resetBtn').addEventListener('click', gameBoard.reset)
+
+//         return {
+//             setup,
+//         }
+//     })
+
+    
+// })();

@@ -8,6 +8,35 @@
     text-shadow: 2px 3px #64f000;
     font-family: 'Anton', sans-serif;
 }
+
+.overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    color: white;
+    text-align: center;
+}
+
+.overlay > * {
+    margin-top: 200px;
+}
+
+.overlay > button {
+    cursor: pointer;
+    background-color: #64f000;
+    color: white;
+    height: 100px;
+    width: 200px;
+}
+
+
 .scoreBoard {
     grid-column: 2;
     grid-row: 1;
@@ -33,13 +62,20 @@
     height: 450px;
     width: 450px;
     display: grid;
+    gap: 5px;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 }
 
 .cell {
-    border: 1px solid greenyellow;
+    background-color: #64f000;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.cell:hover {
+    cursor: pointer;
+    top: -2%;
 }
