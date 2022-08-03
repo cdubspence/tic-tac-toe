@@ -13,6 +13,9 @@
     grid-row: 1;
     font-size: 38px;
 }
+.scoreBoard > button {
+    margin-bottom: 0;
+}
 
 .player1 {
     grid-column: 1;
