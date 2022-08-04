@@ -7,14 +7,14 @@ const gameBoard = (() => {
     let playerXmoves = [];
     let playerOmoves = [];
     const winningCombos = [
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
+        ['0','1','2'],
+        ['3','4','5'],
+        ['6','7','8'],
+        ['0','3','6'],
+        ['1','4','7'],
+        ['2','5','8'],
+        ['0','4','8'],
+        ['2','4','6']
     ]
 
     function setup() {
@@ -50,18 +50,14 @@ const gameBoard = (() => {
     }
 
     function checkBoard() {
-        let winner = '';
         for(i = 0; i < winningCombos.length; i++) {
-            if(winningCombos[i].sort().join(',') === playerXmoves.sort().join(',')) {
-                winner = 'X Wins!'
-                displayResults(winner)
-            } else if (winningCombos[i].sort().join(',') === playerOmoves.sort().join(',')) {
-                winner = 'O Wins!'
-                displayResults(winner)
-            } else if (playerOmoves.length+playerXmoves.length == 9){
-                winner = 'Tie!'
-                displayResults(winner)
-            } 
+            if(winningCombos[i].every(element => playerXmoves.includes(element))) {
+                displayResults('X WINS!')
+            } else if(winningCombos[i].every(element => playerOmoves.includes(element))) {
+                displayResults('O WINS!')
+            } else if (playerOmoves.length + playerXmoves.length == 9) {
+                displayResults('TIE GAME!')
+            }
         }
     }
 
@@ -120,3 +116,14 @@ gameBoard.setup();
 
     
 // })();
+
+// if(winningCombos[i].sort().join(',') === playerXmoves.sort().join(',')) {
+//     winner = 'X Wins!'
+//     displayResults(winner)
+// } else if (winningCombos[i].sort().join(',') === playerOmoves.sort().join(',')) {
+//     winner = 'O Wins!'
+//     displayResults(winner)
+// } else if (playerOmoves.length+playerXmoves.length == 9){
+//     winner = 'Tie!'
+//     displayResults(winner)
+// } 
