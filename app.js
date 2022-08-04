@@ -2,6 +2,7 @@
 const gameBoard = (() => {
     const cells = document.querySelectorAll('.cell');
     const overlay = document.querySelector('.overlay');
+    const text = document.getElementById('winnerText');
     let marker = 'X';
     let playerXmoves = [];
     let playerOmoves = [];
@@ -56,7 +57,6 @@ const gameBoard = (() => {
                 displayResults(winner)
             } else if (winningCombos[i].sort().join(',') === playerOmoves.sort().join(',')) {
                 winner = 'O Wins!'
-                console.log(winner)
                 displayResults(winner)
             } else if (playerOmoves.length+playerXmoves.length == 9){
                 winner = 'Tie!'
@@ -66,14 +66,13 @@ const gameBoard = (() => {
     }
 
     function displayResults(winner) {
-        overlay.innerHTML += `<h1>${winner}</h1>`;
+        text.textContent = winner;
         overlay.style.width = '100%';
 
     }
 
     function reset() {
         overlay.style.width = '0';
-        overlay.innerHTML = ''
         marker = 'X'
         playerOmoves = [];
         playerXmoves = [];
