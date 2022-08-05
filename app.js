@@ -52,11 +52,11 @@ const gameBoard = (() => {
     function checkBoard() {
         for(i = 0; i < winningCombos.length; i++) {
             if(winningCombos[i].every(element => playerXmoves.includes(element))) {
-                displayResults('X WINS!')
+                return displayResults('X WINS!')
             } else if(winningCombos[i].every(element => playerOmoves.includes(element))) {
-                displayResults('O WINS!')
+                return displayResults('O WINS!')
             } else if (playerOmoves.length + playerXmoves.length == 9) {
-                displayResults('TIE GAME!')
+                return displayResults('TIE GAME!')
             }
         }
     }
@@ -87,43 +87,3 @@ const gameBoard = (() => {
 })();
 
 gameBoard.setup();
-
-
-
-
-
-//maybe check wins?
-// xwins = winningCombos[i].every(el => {
-//     return playerXmoves.includes(el);    
-// })
-// owins = winningCombos[i].every(el => {
-//     return playerOmoves.includes(el);
-// })
-
-
-// const game = (() => {
-
-//     (function setup() {
-//         gameBoard.cell.forEach(cell => {
-//             cell.addEventListener('click', gameBoard.playerMove)
-//         });
-//         document.getElementById('resetBtn').addEventListener('click', gameBoard.reset)
-
-//         return {
-//             setup,
-//         }
-//     })
-
-    
-// })();
-
-// if(winningCombos[i].sort().join(',') === playerXmoves.sort().join(',')) {
-//     winner = 'X Wins!'
-//     displayResults(winner)
-// } else if (winningCombos[i].sort().join(',') === playerOmoves.sort().join(',')) {
-//     winner = 'O Wins!'
-//     displayResults(winner)
-// } else if (playerOmoves.length+playerXmoves.length == 9){
-//     winner = 'Tie!'
-//     displayResults(winner)
-// } 
