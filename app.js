@@ -39,13 +39,18 @@ const gameBoard = (() => {
             if (marker == 'X') {
                 playerXmoves.push(cell.id)
                 marker = 'O';
+                document.getElementById('turnTextX').textContent = ''
+                document.getElementById('turnTextO').textContent = 'Your Move!'
                 checkBoard()
             } else {
                 playerOmoves.push(cell.id)
                 marker = 'X'
+                document.getElementById('turnTextO').textContent = ''
+                document.getElementById('turnTextX').textContent = 'Your Move!'
                 checkBoard()
             }
         }
+
         
     }
 
@@ -72,6 +77,8 @@ const gameBoard = (() => {
         marker = 'X'
         playerOmoves = [];
         playerXmoves = [];
+        document.getElementById('turnTextO').textContent = ''
+        document.getElementById('turnTextX').textContent = 'Your Move!'
         cells.forEach(cell => {
             cell.innerHTML = ''
             cell.style.border = 'none';
